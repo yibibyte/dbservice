@@ -1,6 +1,5 @@
 package ru.db;
 
-import javax.swing.*;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -45,16 +44,16 @@ public class Main {
                             resultSet.getString("state"));
                 }
             } else if (command == 2) {
-                String UPDATE_TASK_SQL = "update task set state = 'Доделывается' where id = ?;";
+                String UPDATE_TASK_SQL = "update task set state = 'В процессе' where id = ?;";
                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TASK_SQL);
-                System.out.println("Введите id task");
+                System.out.println("Введите id задачи");
                 int idTask = scanner.nextInt();
                 preparedStatement.setInt(1, idTask);
                 preparedStatement.executeUpdate();
             } else if (command == 3) {
-                String INSERT_TASK_SQL = "insert into task(task, state) values (?, 'Сделано');";
+                String INSERT_TASK_SQL = "insert into task(task, state) values (?, 'Выполнено');";
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TASK_SQL);
-                System.out.println("Введите имя task\n");
+                System.out.println("Введите имя задачи\n");
                 String nameTask = scanner.nextLine();
                 preparedStatement.setString(1, nameTask);
                 preparedStatement.executeUpdate();
