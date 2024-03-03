@@ -8,7 +8,7 @@ public class UserRepository {
     private Connection connection;
 
     public UserRepository() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/mydatabase", "postgres", "password");
+        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/mydatabase", "postgres", "postgres");
     }
 
     public void insertUser(User user) throws SQLException {
