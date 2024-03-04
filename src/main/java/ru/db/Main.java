@@ -1,5 +1,7 @@
 package ru.db;
 
+import org.postgresql.util.PSQLException;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -21,48 +23,65 @@ public class Main {
     */
 
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
-        Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
+        try {
+
+            Scanner scanner = new Scanner(System.in);
+            Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
 
 
-        while (true) {
-            System.out.println("1. Показать все задачи");
-            System.out.println("2. Выполнить задачу");
-            System.out.println("3. Создать задачу");
-            System.out.println("4. Выйти");
-            int command = scanner.nextInt();
+            while (true) {
+                System.out.println("1. Показать все задачи");
+                System.out.println("2. Выполнить задачу");
+                System.out.println("3. Создать задачу");
+                System.out.println("4. Выйти");
+                int command = scanner.nextInt();
 
-            if (command == 1) {
-                // Утверждение на отправку в базу данных наш запрос
-                Statement statement = connection.createStatement();
-                String SELECT_TASK_SQL = "select * from task order by id desc";
-                ResultSet resultSet = statement.executeQuery(SELECT_TASK_SQL);
-                while (resultSet.next()) {
-                    System.out.println(
-                            resultSet.getInt("id") +
-                            resultSet.getString("task") +
-                            resultSet.getString("state"));
+                if (command == 1) {
+                    try {
+                        // Утверждение на отправку в базу данных наш запрос
+                        Statement statement = connection.createStatement();
+                        String SELECT_TASK_SQL = "select * from task order by id desc";
+                        ResultSet resultSet = statement.executeQuery(SELECT_TASK_SQL);
+                        while (resultSet.next()) {
+                            System.out.println(
+                                    resultSet.getInt("id") +
+                                            resultSet.getString("task") +
+                                            resultSet.getString("state"));
+                        }
+                    } catch (PSQLException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else if (command == 2) {
+                    try {
+                        String UPDATE_TASK_SQL = "update task set state = 'В процессе' where id = ?;";
+                        PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TASK_SQL);
+                        System.out.println("Введите id задачи");
+                        int idTask = scanner.nextInt();
+                        preparedStatement.setInt(1, idTask);
+                        preparedStatement.executeUpdate();
+                    } catch (PSQLException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else if (command == 3) {
+                    try {
+                        String INSERT_TASK_SQL = "insert into task(task, state) values (?, 'Выполнено');";
+                        PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TASK_SQL);
+                        System.out.println("Введите имя задачи\n");
+                        String nameTask = scanner.nextLine();
+                        preparedStatement.setString(1, nameTask);
+                        preparedStatement.executeUpdate();
+                    } catch (PSQLException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else if (command == 4) {
+                    System.exit(0);
+                } else {
+                    System.err.println("Введите число из списка");
                 }
-            } else if (command == 2) {
-                String UPDATE_TASK_SQL = "update task set state = 'В процессе' where id = ?;";
-                PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TASK_SQL);
-                System.out.println("Введите id задачи");
-                int idTask = scanner.nextInt();
-                preparedStatement.setInt(1, idTask);
-                preparedStatement.executeUpdate();
-            } else if (command == 3) {
-                String INSERT_TASK_SQL = "insert into task(task, state) values (?, 'Выполнено');";
-                PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TASK_SQL);
-                System.out.println("Введите имя задачи\n");
-                String nameTask = scanner.nextLine();
-                preparedStatement.setString(1, nameTask);
-                preparedStatement.executeUpdate();
 
-            } else if (command == 4) {
-                System.exit(0);
-            } else {
-                System.err.println("Введите число из списка");
             }
+        } catch (RuntimeException e) {
+            throw new RuntimeException();
         }
     }
 }
