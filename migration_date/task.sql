@@ -12,9 +12,20 @@ insert into tasks (id, task, state, description) values (3, 'Проверить 
 insert into tasks (id, task, state, description) values (4, 'Обвновить БД', 'В процессе', 'Обновить ПО в базе данных');
 insert into tasks (task, state, description) values ('Test task', 'Test state', 'Test description');
 
-select * from tasks;
+select * from tasks order by task desc;
+
+delete from tasks where id = 9;
+delete from tasks where id = 10;
+delete from tasks where id = 11;
+delete from tasks where id = 12;
+delete from tasks where id = 14;
+delete from tasks where id = 15;
+delete from tasks where id = 16;
+delete from tasks where id = 17;
 
 
+
+-------------------
 
 
 select * from task order by id desc
@@ -44,7 +55,6 @@ select title from book where public_year = 1925;
 select * from book where id > 3;
 
 update author set name = concat(name, '_updated') where name = 'test author';
-
 
 delete from author where name like '%_updated';
 
