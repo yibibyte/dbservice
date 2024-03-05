@@ -12,7 +12,6 @@ public class Main {
     private static final String USER_NAME = "postgres";
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
-
     /*
     jdbc:postgresql:database
     jdbc:postgresql:/
@@ -23,12 +22,8 @@ public class Main {
     */
 
     public static void main(String[] args) throws Exception {
-        try {
-
+        try (Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD)) {
             Scanner scanner = new Scanner(System.in);
-            Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-
-
             while (true) {
                 System.out.println("1. Показать все задачи");
                 System.out.println("2. Выполнить задачу");
@@ -49,20 +44,32 @@ public class Main {
                                                 resultSet.getString("task") +
                                                 resultSet.getString("state"));
                             }
+                            resultSet.close();
+                            statement.close();
                         } catch (PSQLException e) {
-                            System.out.println(e.getMessage());
+                            System.err.println("Ошибка SQL: " + e.getMessage());
                         }
                         break;
                     case 2:
                         try {
-                            String UPDATE_TASK_SQL = "update tasks set state = 'В процессе' where id = ?;";
+//                            String UPDATE_TASK_SQL = "update tasks set state = 'В процессе' where id = ?;";
+                            String UPDATE_TASK_SQL = "update tasks set state = ? where id = ?;";
                             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TASK_SQL);
                             System.out.println("Введите id задачи");
                             int idTask = scanner.nextInt();
-                            preparedStatement.setInt(1, idTask);
-                            preparedStatement.executeUpdate();
+                            System.out.println("Введите статус задачи");
+                            int stateTask = scanner.nextInt();
+                            preparedStatement.setInt(1, stateTask);
+                            preparedStatement.setInt(2, idTask);
+                            int rowsUpdated = preparedStatement.executeUpdate();
+                            if (rowsUpdated > 0) {
+                                System.out.println("Запись успешно обновлена.");
+                            } else {
+                                System.out.println("Ошибка при обновлении записи.");
+                            }
+                            preparedStatement.close();
                         } catch (PSQLException e) {
-                            System.out.println(e.getMessage());
+                            System.err.println("Ошибка SQL: " + e.getMessage());
                         }
                         break;
                     case 3:
@@ -77,8 +84,9 @@ public class Main {
 
                             preparedStatement.setString(1, nameTask);
                             preparedStatement.executeUpdate();
+                            preparedStatement.close();
                         } catch (PSQLException e) {
-                            System.out.println(e.getMessage());
+                            System.err.println("Ошибка SQL: " + e.getMessage());
                         }
                         break;
                     case 4:
