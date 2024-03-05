@@ -25,10 +25,11 @@ public class Main {
         try (Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD)) {
             Scanner scanner = new Scanner(System.in);
             while (true) {
-                System.out.println("1. Показать все задачи");
-                System.out.println("2. Выполнить задачу");
-                System.out.println("3. Создать задачу");
-                System.out.println("4. Выйти");
+                System.out.println(" 1. Показать все задачи ");
+                System.out.println(" 2. Обновить задачу ");
+                System.out.println(" 3. Создать задачу ");
+                System.out.println(" 4. Удалить задачу ");
+                System.out.println(" 5. Выйти ");
                 int command = scanner.nextInt();
 
                 switch (command) {
@@ -40,77 +41,90 @@ public class Main {
                             ResultSet resultSet = statement.executeQuery(SELECT_TASK_SQL);
                             while (resultSet.next()) {
                                 System.out.println(
-                                        resultSet.getInt("id") +
-                                                resultSet.getString("task") +
+                                        resultSet.getInt("id") + " " +
+                                                resultSet.getString("task") + " " +
                                                 resultSet.getString("state"));
                             }
-                            resultSet.close();
-                            statement.close();
+                            System.out.println();
                         } catch (PSQLException e) {
                             System.err.println("Ошибка SQL: " + e.getMessage());
                         }
                         break;
                     case 2:
                         try {
-//                            String UPDATE_TASK_SQL = "update tasks set state = 'В процессе' where id = ?;";
-                            String UPDATE_TASK_SQL = "update tasks set state = ? where id = ?;";
-                            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TASK_SQL);
-                            System.out.println("Введите id задачи");
-                            int idTask = scanner.nextInt();
-                            System.out.println("Введите статус задачи");
-                            int stateTask = scanner.nextInt();
-                            preparedStatement.setInt(1, stateTask);
-                            preparedStatement.setInt(2, idTask);
+                            System.out.print("Введите ID задачи: ");
+                            int taskId = scanner.nextInt();
+
+                            System.out.print("Введите новый статус задачи: ");
+                            String newStatus = scanner.next();
+
+                            String sql = "UPDATE tasks SET state = ? WHERE id = ?";
+                            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                            preparedStatement.setString(1, newStatus);
+                            preparedStatement.setInt(2, taskId);
+
                             int rowsUpdated = preparedStatement.executeUpdate();
                             if (rowsUpdated > 0) {
                                 System.out.println("Запись успешно обновлена.");
                             } else {
-                                System.out.println("Ошибка при обновлении записи.");
+                                System.out.println("Ошибка при обновлении записи или запись с указанным ID не найдена.");
                             }
-                            preparedStatement.close();
                         } catch (PSQLException e) {
                             System.err.println("Ошибка SQL: " + e.getMessage());
                         }
                         break;
                     case 3:
                         try {
-                            //String taskName = scanner.nextLine();
-//                            String INSERT_TASK_SQL = "insert into tasks(task, state, description) values ('" + taskName + "', 'В процессе', '');";
+                            System.out.print("Введите название задачи (task): ");
+                            String taskName = scanner.nextLine();
 
-                            System.out.println("Введите имя задачи\n");
-                            String nameTask = scanner.nextLine();
-                            String INSERT_TASK_SQL = "insert into tasks(task, state, description) values (?, 'В процессе', '');";
-                            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TASK_SQL);
+                            System.out.print("Введите статус задачи (state): ");
+                            String taskStatus = scanner.nextLine();
 
-                            preparedStatement.setString(1, nameTask);
-                            preparedStatement.executeUpdate();
-                            preparedStatement.close();
+                            System.out.print("Введите описание задачи (description): ");
+                            String taskDescription = scanner.nextLine();
+
+                            String sql = "INSERT INTO tasks(task, state, description) VALUES (?, ?, ?)";
+                            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                            preparedStatement.setString(1, taskName);
+                            preparedStatement.setString(2, taskStatus);
+                            preparedStatement.setString(3, taskDescription);
+
+                            int rowsInserted = preparedStatement.executeUpdate();
+                            if (rowsInserted > 0) {
+                                System.out.println("Новая задача успешно добавлена.");
+                            } else {
+                                System.out.println("Ошибка при добавлении новой задачи.");
+                            }
                         } catch (PSQLException e) {
                             System.err.println("Ошибка SQL: " + e.getMessage());
                         }
                         break;
+
                     case 4:
+                        try {
+                            System.out.print("Введите ID задачи для удаления: ");
+                            int taskId = scanner.nextInt();
+                            String DELETE_TASK_SQL = "delete from tasks where id = ?;";
+                            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_TASK_SQL);
+                            preparedStatement.setInt(1, taskId);
+
+                            int rowsDeleted = preparedStatement.executeUpdate();
+                            if (rowsDeleted > 0) {
+                                System.out.println("Запись успешно удалена.");
+                            } else {
+                                System.out.println("Запись с указанным ID не найдена.");
+                            }
+                        } catch (PSQLException e) {
+                            System.err.println("Ошибка SQL: " + e.getMessage());
+                        }
+                        break;
+                    case 5:
                         System.exit(0);
                         scanner.close();
                     default:
                         System.err.println("Введите число из списка");
                 }
-                //delete from название_таблицы where id = значение;
-/*
-                    case 5:
-                        try {
-                            int taskName = scanner.nextInt();
-                            String DELETE_TASK_SQL = "delete from tasks where id = " + taskName + ";";
-                            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_TASK_SQL);
-                            System.out.println("Введите id задачи \n");
-                            String nameTask = scanner.nextLine();
-                            preparedStatement.setString(1, nameTask);
-                            preparedStatement.executeUpdate();
-                        } catch (PSQLException e) {
-                            System.out.println(e.getMessage());
-                        }
-                        break;
-* */
             }
         } catch (RuntimeException e) {
             e.printStackTrace();
