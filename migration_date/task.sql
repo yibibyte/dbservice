@@ -10,7 +10,7 @@ insert into tasks (id, task, state, description) values (1, 'Установит�
 insert into tasks (id, task, state, description) values (2, 'Настроить БД', 'Сделано', '');
 insert into tasks (id, task, state, description) values (3, 'Проверить БД на подключение', 'Сделано', 'Есть ли подключение к БД');
 insert into tasks (id, task, state, description) values (4, 'Обвновить БД', 'В процессе', 'Обновить ПО в базе данных');
-insert into tasks (id, task, state, description) values (? 'Деделать БД', 'В процессе', '');
+insert into tasks (task, state, description) values ('Test task', 'Test state', 'Test description');
 
 select * from tasks;
 
