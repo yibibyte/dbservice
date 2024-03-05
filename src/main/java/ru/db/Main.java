@@ -56,7 +56,7 @@ public class Main {
                             int taskId = scanner.nextInt();
 
                             System.out.print("Введите новый статус задачи: ");
-                            String newStatus = scanner.next();
+                            String newStatus = scanner.nextLine();
 
                             String sql = "UPDATE tasks SET state = ? WHERE id = ?";
                             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -127,7 +127,7 @@ public class Main {
                 }
             }
         } catch (RuntimeException e) {
-            e.printStackTrace();
+            System.err.println("Ошибка приложения: " + e.getMessage());
         }
     }
 }
