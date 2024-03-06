@@ -1,4 +1,5 @@
 
+--- Создание Таблицы
 create table tasks (
     id serial primary key,
     task varchar(30),
@@ -14,47 +15,7 @@ insert into tasks (task, state, description) values ('Test task', 'Test state', 
 
 select * from tasks order by task desc;
 
-delete from tasks where id = 9;
-delete from tasks where id = 10;
-delete from tasks where id = 11;
-delete from tasks where id = 12;
-delete from tasks where id = 14;
-delete from tasks where id = 15;
-delete from tasks where id = 16;
-delete from tasks where id = 17;
+delete from tasks where id = 100;
 
 
-
--------------------
-
-
-select * from task order by id desc
-
-update task set state = 'В процессе' where id = 1;
-
-
-insert into author(name) values('Virginia Woolf');
-insert into author(name) values('Harper Lee');
-insert into author(name) values('F. Scott Fitzgerald');
-insert into author(name) values('J.R.R. Tolkien');
-insert into author(name) values('George Orwell');
-
-insert into user(title, author_id, public_year) values
-('Mrs. Dalloway',1,1925),
-('To the Lighthouse',1,1927),
-('To Kill a Mockingbird',2,1960),
-('The Great Gatsby',3,1925),
-('The Lord of the Rings',4,1955);
-
-insert into book(title, author_id, public_year) values
-('1984',(select id from author where name = 'George Orwell'),1949),
-('Animal Farm',(select id from author where name = 'George Orwell'),1945);
-
-select title from book where public_year = 1925;
-
-select * from book where id > 3;
-
-update author set name = concat(name, '_updated') where name = 'test author';
-
-delete from author where name like '%_updated';
 
