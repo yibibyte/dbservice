@@ -22,6 +22,7 @@ public class Main {
     */
 
     public static void main(String[] args) throws Exception {
+        // Class.forName(JDBC_DRIVER); старый способ
         try (Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD)) {
             Scanner scanner = new Scanner(System.in);
             while (true) {
@@ -41,9 +42,10 @@ public class Main {
                             ResultSet resultSet = statement.executeQuery(SELECT_TASK_SQL);
                             while (resultSet.next()) {
                                 System.out.println(
-                                        resultSet.getInt("id") + " " +
-                                                resultSet.getString("task") + " " +
-                                                resultSet.getString("state"));
+                                        resultSet.getInt("id") + " || " +
+                                                resultSet.getString("task") + " || " +
+                                                resultSet.getString("state") + " || " +
+                                                resultSet.getString("description"));
                             }
                             System.out.println();
                         } catch (PSQLException e) {
@@ -52,11 +54,14 @@ public class Main {
                         break;
                     case 2:
                         try {
+                            Scanner taskIdScanner = new Scanner(System.in);
+                            Scanner newStatusScanner = new Scanner(System.in);
+
                             System.out.print("Введите ID задачи: ");
-                            int taskId = scanner.nextInt();
+                            int taskId = taskIdScanner.nextInt();
 
                             System.out.print("Введите новый статус задачи: ");
-                            String newStatus = scanner.nextLine();
+                            String newStatus = newStatusScanner.next();
 
                             String sql = "UPDATE tasks SET state = ? WHERE id = ?";
                             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -75,14 +80,18 @@ public class Main {
                         break;
                     case 3:
                         try {
+                            Scanner taskNameScanner = new Scanner(System.in);
+                            Scanner taskStatusScanner = new Scanner(System.in);
+                            Scanner taskDescriptionScanner = new Scanner(System.in);
+
                             System.out.print("Введите название задачи (task): ");
-                            String taskName = scanner.nextLine();
+                            String taskName = taskNameScanner.nextLine();
 
                             System.out.print("Введите статус задачи (state): ");
-                            String taskStatus = scanner.nextLine();
+                            String taskStatus = taskStatusScanner.nextLine();
 
                             System.out.print("Введите описание задачи (description): ");
-                            String taskDescription = scanner.nextLine();
+                            String taskDescription = taskDescriptionScanner.nextLine();
 
                             String sql = "INSERT INTO tasks(task, state, description) VALUES (?, ?, ?)";
                             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -96,6 +105,8 @@ public class Main {
                             } else {
                                 System.out.println("Ошибка при добавлении новой задачи.");
                             }
+
+
                         } catch (PSQLException e) {
                             System.err.println("Ошибка SQL: " + e.getMessage());
                         }
@@ -103,8 +114,9 @@ public class Main {
 
                     case 4:
                         try {
+                            Scanner taskIdScanner = new Scanner(System.in);
                             System.out.print("Введите ID задачи для удаления: ");
-                            int taskId = scanner.nextInt();
+                            int taskId = taskIdScanner.nextInt();
                             String DELETE_TASK_SQL = "delete from tasks where id = ?;";
                             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_TASK_SQL);
                             preparedStatement.setInt(1, taskId);
