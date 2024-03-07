@@ -1,4 +1,5 @@
 
+--- Create
 create table tasks (
     id serial primary key,
     task varchar(30),
@@ -6,14 +7,21 @@ create table tasks (
     description varchar(100)
 );
 
+--- Create
 insert into tasks (id, task, state, description) values (1, 'Установить PostgreSQL', 'Сделано', 'Установить все компоненты к Postgre');
 insert into tasks (id, task, state, description) values (2, 'Настроить БД', 'Сделано', '');
 insert into tasks (id, task, state, description) values (3, 'Проверить БД на подключение', 'Сделано', 'Есть ли подключение к БД');
 insert into tasks (id, task, state, description) values (4, 'Обвновить БД', 'В процессе', 'Обновить ПО в базе данных');
 insert into tasks (task, state, description) values ('Test task', 'Test state', 'Test description');
 
+-- Read запрос
 select * from tasks order by task desc;
 
+--- UPDATE
+update task set state = 'В процессе' where id = 1;
+
+
+-- Delete
 delete from tasks where id = 9;
 delete from tasks where id = 10;
 delete from tasks where id = 11;
