@@ -52,10 +52,13 @@ public class AppController {
 
     public void update(String idTask, String task, String state, String description) {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE tasks SET state = ? WHERE id = ?");
+            // state = ?, task = ?, description = ?
+            PreparedStatement statement = connection.prepareStatement("UPDATE tasks SET state = ?, task = ?, description = ? WHERE id = ?");
 
             statement.setString(1, state);
-            statement.setInt(2, Integer.parseInt(idTask));
+            statement.setString(2, task);
+            statement.setString(3, description);
+            statement.setInt(4, Integer.parseInt(idTask));
 //            statement.setString(1, task);
 //            statement.setString(1, task);
 //            statement.setString(3, description);

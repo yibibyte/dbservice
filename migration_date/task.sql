@@ -21,7 +21,8 @@ select * from tasks order by id asc ;
 
 --- UPDATE
 update task set state = 'В процессе' where id = 10;
-UPDATE tasks SET state = "state_state" SET task = "task_task" SET description = "description_description" WHERE id = 42
+--UPDATE tasks SET state = '' SET task = 'task_task' SET description = 'description_description' WHERE id = 27;
+UPDATE tasks SET state = 'state_state', task = 'task_task', description = 'description_description' WHERE id = 27;
 
 --- DELETE
 delete from tasks where id = 10;
