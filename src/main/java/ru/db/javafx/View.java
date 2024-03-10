@@ -124,10 +124,11 @@ public class View extends Application {
 
     private void update() {
         Model model = tableView.getSelectionModel().getSelectedItem();
+        String taskId = idTextField.getText();
         String task = taskTextField.getText();
         String state = stateTextField.getText();
         String description = descriptionTextField.getText();
-        controller.update(model.getId(), task, state, description);
+        controller.update(taskId, task, state, description);
         loadData();
     }
 

@@ -50,12 +50,15 @@ public class AppController {
         return models;
     }
 
-    public void update(int id, String task, String state, String description) {
+    public void update(String idTask, String task, String state, String description) {
         try {
             PreparedStatement statement = connection.prepareStatement("UPDATE tasks SET state = ? WHERE id = ?");
-            statement.setString(1, task);
-            statement.setString(2, state);
-            statement.setString(3, description);
+
+            statement.setString(1, state);
+            statement.setInt(2, Integer.parseInt(idTask));
+//            statement.setString(1, task);
+//            statement.setString(1, task);
+//            statement.setString(3, description);
             statement.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Ошибка SQL: " + e.getMessage());

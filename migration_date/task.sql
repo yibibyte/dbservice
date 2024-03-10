@@ -21,9 +21,18 @@ select * from tasks order by id asc ;
 
 --- UPDATE
 update task set state = 'В процессе' where id = 10;
+UPDATE tasks SET state = "state_state" SET task = "task_task" SET description = "description_description" WHERE id = 42
 
 --- DELETE
 delete from tasks where id = 10;
 
 
+-- Не корректное отображение руссого яызка, нужно поменять в файл postgres.conf кодировку
+lc_messages = 'Russian_Russia.ru-x-icu'			# locale for system error message
+					# strings
+lc_monetary = 'Russian_Russia.ru-x-icu'			# locale for monetary formatting
+lc_numeric = 'Russian_Russia.ru-x-icu'			# locale for number formatting
+lc_time = 'Russian_Russia.ru-x-icu'				# locale for time formatting
 
+# default configuration for text search
+default_text_search_config = 'pg_catalog.russian'
