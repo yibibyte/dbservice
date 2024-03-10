@@ -134,7 +134,7 @@ public class View extends Application {
 
     private void delete() {
         Model model = tableView.getSelectionModel().getSelectedItem();
-        controller.delete(model.getId());
+        controller.delete(Integer.parseInt(idTextField.getText()));
         loadData();
     }
 
