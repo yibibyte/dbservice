@@ -1,8 +1,8 @@
 package ru.db.javafx;
 
- import java.sql.*;
- import java.util.ArrayList;
- import java.util.List;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AppController {
 
@@ -18,11 +18,19 @@ public class AppController {
 
     public void add(String task, String state, String description) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO tasks(task, state, description) VALUES (?, ?, ?)");
-            statement.setString(1, task);
-            statement.setString(2, state);
-            statement.setString(2, description);
-            statement.executeUpdate();
+            String sql = "INSERT INTO tasks(task, state, description) VALUES (?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, task);
+            preparedStatement.setString(2, state);
+            preparedStatement.setString(3, description);
+            preparedStatement.executeUpdate();
+            int rowsInserted = preparedStatement.executeUpdate();
+            // ADDING ALERT !!!!!!!!!!!!!!!!!!!
+            if (rowsInserted > 0) {
+                System.out.println("Новая задача успешно добавлена.");
+            } else {
+                System.out.println("Ошибка при добавлении новой задачи.");
+            }
         } catch (SQLException e) {
             System.err.println("Ошибка SQL: " + e.getMessage());
         }
@@ -34,7 +42,7 @@ public class AppController {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select * from tasks order by id asc");
             while (resultSet.next()) {
-                models.add(new Model(resultSet.getInt("id"), resultSet.getString("task"), resultSet.getString("state"),resultSet.getString("description")));
+                models.add(new Model(resultSet.getInt("id"), resultSet.getString("task"), resultSet.getString("state"), resultSet.getString("description")));
             }
         } catch (SQLException e) {
             System.err.println("Ошибка SQL: " + e.getMessage());
@@ -62,6 +70,20 @@ public class AppController {
         } catch (SQLException e) {
             System.err.println("Ошибка SQL: " + e.getMessage());
         }
+    }
+
+    public int getID(int id) {
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from tasks order by id asc");
+            while (resultSet.next()) {
+                if (resultSet.getInt("id") == id)
+                    return id;
+            }
+        } catch (SQLException e) {
+            System.err.println("Ошибка SQL: " + e.getMessage());
+        }
+        return 0;
     }
 }
 

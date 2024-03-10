@@ -19,6 +19,7 @@ public class View extends Application {
     private TextField taskTextField;
     private TextField stateTextField;
     private TextField descriptionTextField;
+    private TextField idTextField;
     private TextArea rowTextArea;
     private Button selectButton;
     private Button addButton;
@@ -35,8 +36,8 @@ public class View extends Application {
 
         // TableView
         tableView = new TableView<>();
-        tableView.setPrefWidth(400);
-        tableView.setPrefHeight(300);
+        tableView.setPrefWidth(600);
+        tableView.setPrefHeight(500);
 
         TableColumn<Model, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -56,6 +57,7 @@ public class View extends Application {
         taskTextField = new TextField();
         stateTextField = new TextField();
         descriptionTextField = new TextField();
+        idTextField = new TextField();
 
         // Buttons
         addButton = new Button("Add");
@@ -65,7 +67,17 @@ public class View extends Application {
         updateButton.setOnAction(e -> update());
 
         deleteButton = new Button("Delete");
-        deleteButton.setOnAction(e -> delete());
+        deleteButton.setOnAction(actionEvent -> {
+            if (controller.getID(Integer.parseInt(idTextField.getText())) != 0 ) {
+                delete();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Вы ввели не правильный id");
+                alert.setTitle("Ошибка id");
+                alert.setHeaderText("Внимание");
+                alert.setContentText("Введите id из списка");
+                alert.showAndWait();
+            }
+        });
 
         // GridPane
         GridPane gridPane = new GridPane();
@@ -78,11 +90,12 @@ public class View extends Application {
         gridPane.add(taskTextField, 1, 1);
         gridPane.add(new Label("State:"), 0, 2);
         gridPane.add(stateTextField, 1, 2);
-        gridPane.add(new Label("Description:"), 0, 2);
+        gridPane.add(new Label("Description:"), 0, 3);
         gridPane.add(descriptionTextField, 1, 3);
         gridPane.add(addButton, 2, 2);
-        gridPane.add(updateButton, 0, 3);
-        gridPane.add(deleteButton, 1, 3);
+        gridPane.add(updateButton, 0, 4);
+        gridPane.add(idTextField, 0, 5);
+        gridPane.add(deleteButton, 1, 5);
 
         // Scene
         Scene scene = new Scene(gridPane);
@@ -105,7 +118,7 @@ public class View extends Application {
         String task = taskTextField.getText();
         String state = stateTextField.getText();
         String description = descriptionTextField.getText();
-        controller.add(task, state,description);
+        controller.add(task, state, description);
         loadData();
     }
 

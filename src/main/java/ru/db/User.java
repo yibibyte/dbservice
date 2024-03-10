@@ -1,6 +1,8 @@
 package ru.db;
 
-public class User {
+import ru.db.compare.UserComparator;
+
+public class User implements UserComparator {
     private int id;
     private String name;
     private int age;
@@ -33,6 +35,11 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public int compare(User person1, User person2) {
+        return Integer.compare(person1.getAge(), person2.getAge());
     }
 
 }
