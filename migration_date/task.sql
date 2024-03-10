@@ -16,13 +16,14 @@ insert into tasks (id, task, state, description) values (4, 'Обвновить 
 insert into tasks (task, state, description) values ('Test task', 'Test state', 'Test description');
 
 -- READ запрос
-select * from tasks order by task desc;
+select * from tasks order by id asc ;
+
 
 --- UPDATE
-update task set state = 'В процессе' where id = 1;
+update task set state = 'В процессе' where id = 10;
 
 --- DELETE
-delete from tasks where id = 100;
+delete from tasks where id = 10;
 
 
 

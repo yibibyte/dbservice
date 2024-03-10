@@ -19,7 +19,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.6.0</version>
+            <version>42.7.2</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -36,6 +36,24 @@
 <!--            <groupId>org.openjfx</groupId>-->
 <!--            <artifactId>javafx-controls</artifactId>-->
 <!--            <version>21-ea+24</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.openjfx</groupId>-->
+<!--            <artifactId>javafx-graphics</artifactId>-->
+<!--            <version>17.0.6</version>-->
+<!--            <classifier>win</classifier>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.openjfx</groupId>-->
+<!--            <artifactId>javafx-graphics</artifactId>-->
+<!--            <version>17.0.6</version>-->
+<!--            <classifier>linux</classifier>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.openjfx</groupId>-->
+<!--            <artifactId>javafx-graphics</artifactId>-->
+<!--            <version>17.0.6</version>-->
+<!--            <classifier>mac</classifier>-->
 <!--        </dependency>-->
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -100,15 +118,25 @@
                         <configuration>
                             <!--                            <mainClass>com.example.demo2/com.example.demo2.app.App</mainClass>-->
                             <mainClass>ru.db.javafx.View</mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
-                            <noManPages>true</noManPages>
-                            <stripDebug>true</stripDebug>
-                            <noHeaderFiles>true</noHeaderFiles>
+<!--                            <launcher>app</launcher>-->
+<!--                            <jlinkZipName>app</jlinkZipName>-->
+<!--                            <jlinkImageName>app</jlinkImageName>-->
+<!--                            <noManPages>true</noManPages>-->
+<!--                            <stripDebug>true</stripDebug>-->
+<!--                            <noHeaderFiles>true</noHeaderFiles>-->
                             <encoding>UTF-8</encoding>
                         </configuration>
                     </execution>
+<!--                    <execution>-->
+<!--                        &lt;!&ndash; Configuration for debugging &ndash;&gt;-->
+<!--                        <id>debug</id>-->
+<!--                        <configuration>-->
+<!--                            <options>-->
+<!--                                <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:8000</option>-->
+<!--                            </options>-->
+<!--                            <mainClass>ru.db.javafx.View</mainClass>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
                 </executions>
             </plugin>
 

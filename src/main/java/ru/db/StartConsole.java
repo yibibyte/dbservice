@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * Logic Connection to DB
  */
-public class Main {
+public class StartConsole {
     private static final String USER_NAME = "postgres";
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
@@ -42,9 +42,9 @@ public class Main {
                             ResultSet resultSet = statement.executeQuery(SELECT_TASK_SQL);
                             while (resultSet.next()) {
                                 System.out.println(
-                                        resultSet.getInt("id") + " || " +
-                                                resultSet.getString("task") + " || " +
-                                                resultSet.getString("state") + " || " +
+                                        resultSet.getInt("id") + " | " +
+                                                resultSet.getString("task") + " | " +
+                                                resultSet.getString("state") + " | " +
                                                 resultSet.getString("description"));
                             }
                             System.out.println();
@@ -58,6 +58,11 @@ public class Main {
                             Scanner newStatusScanner = new Scanner(System.in);
 
                             System.out.print("Введите ID задачи: ");
+                            boolean isInt = taskIdScanner.hasNextInt();
+                            if (!isInt) {
+                                System.out.println("Введите целое число для обновления ID задачи");
+                                break;
+                            }
                             int taskId = taskIdScanner.nextInt();
 
                             System.out.print("Введите новый статус задачи: ");
@@ -115,8 +120,16 @@ public class Main {
                     case 4:
                         try {
                             Scanner taskIdScanner = new Scanner(System.in);
+
                             System.out.print("Введите ID задачи для удаления: ");
+                            boolean isInt = taskIdScanner.hasNextInt();
+                            if (!isInt) {
+                                System.out.println("Введите целое число для удаления ID задачи");
+                                break;
+                            }
+
                             int taskId = taskIdScanner.nextInt();
+
                             String DELETE_TASK_SQL = "delete from tasks where id = ?;";
                             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_TASK_SQL);
                             preparedStatement.setInt(1, taskId);
@@ -132,8 +145,8 @@ public class Main {
                         }
                         break;
                     case 5:
-                        System.exit(0);
                         scanner.close();
+                        System.exit(0);
                     default:
                         System.err.println("Введите число из списка");
                 }
