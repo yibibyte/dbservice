@@ -68,15 +68,16 @@ public class View extends Application {
 
         deleteButton = new Button("Delete");
         deleteButton.setOnAction(actionEvent -> {
-            if (controller.getID(Integer.parseInt(idTextField.getText())) != 0 ) {
-                delete();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Вы ввели не правильный id");
-                alert.setTitle("Ошибка id");
-                alert.setHeaderText("Внимание");
-                alert.setContentText("Введите id из списка");
-                alert.showAndWait();
-            }
+            delete();
+//            if (!idTextField.getText().contains("0") || !idTextField.getText().isEmpty()) {
+//                delete();
+//            } else {
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Вы ввели не правильный id");
+//                alert.setTitle("Ошибка id");
+//                alert.setHeaderText("Внимание");
+//                alert.setContentText("Введите id из списка");
+//                alert.showAndWait();
+//            }
         });
 
         // GridPane
@@ -133,10 +134,34 @@ public class View extends Application {
     }
 
     private void delete() {
-        ///////////////// Model
         Model model = tableView.getSelectionModel().getSelectedItem();
-        controller.delete(Integer.parseInt(idTextField.getText()));
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            int id = model.getId();
+            controller.delete(id);
+        }
+        if ((!idTextField.getText().isEmpty()) && isId(idTextField.getText())) {
+            controller.delete(Integer.parseInt(idTextField.getText()));
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Вы ввели не правильный id");
+            alert.setTitle("Ошибка id");
+            alert.setHeaderText("Внимание");
+            alert.setContentText("Введите id из списка");
+            alert.showAndWait();
+        }
         loadData();
+    }
+
+    public boolean isId(String id) {
+        boolean found = false;
+        ObservableList<Model> data = tableView.getItems();
+        for (Model model : data) {
+            String idFromTable = String.valueOf(model.getId()); // Предполагаем, что у вашей модели есть метод getId()
+            if (idFromTable.equals(id)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
     }
 
     public static void main(String[] args) {
