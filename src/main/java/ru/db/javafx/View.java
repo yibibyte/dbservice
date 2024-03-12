@@ -67,18 +67,7 @@ public class View extends Application {
         updateButton.setOnAction(e -> update());
 
         deleteButton = new Button("Delete");
-        deleteButton.setOnAction(actionEvent -> {
-            delete();
-//            if (!idTextField.getText().contains("0") || !idTextField.getText().isEmpty()) {
-//                delete();
-//            } else {
-//                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Вы ввели не правильный id");
-//                alert.setTitle("Ошибка id");
-//                alert.setHeaderText("Внимание");
-//                alert.setContentText("Введите id из списка");
-//                alert.showAndWait();
-//            }
-        });
+        deleteButton.setOnAction(actionEvent -> delete());
 
         // GridPane
         GridPane gridPane = new GridPane();
@@ -124,12 +113,26 @@ public class View extends Application {
     }
 
     private void update() {
-        Model model = tableView.getSelectionModel().getSelectedItem();
-        String taskId = idTextField.getText();
         String task = taskTextField.getText();
         String state = stateTextField.getText();
         String description = descriptionTextField.getText();
-        controller.update(taskId, task, state, description);
+        Model model = tableView.getSelectionModel().getSelectedItem();
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            int id = model.getId();
+            controller.update(String.valueOf(id), task, state, description);
+        } else {
+            String taskId = idTextField.getText();
+            boolean hasId = isId(taskId);
+            if (hasId) {
+                controller.update(taskId, task, state, description);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Вы ввели не правильный id");
+                alert.setTitle("Ошибка id");
+                alert.setHeaderText("Внимание");
+                alert.setContentText("Введите id из списка");
+                alert.showAndWait();
+            }
+        }
         loadData();
     }
 
@@ -138,8 +141,7 @@ public class View extends Application {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             int id = model.getId();
             controller.delete(id);
-        }
-        if ((!idTextField.getText().isEmpty()) && isId(idTextField.getText())) {
+        } else if ((!idTextField.getText().isEmpty()) && isId(idTextField.getText())) {
             controller.delete(Integer.parseInt(idTextField.getText()));
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Вы ввели не правильный id");
@@ -151,7 +153,7 @@ public class View extends Application {
         loadData();
     }
 
-    public boolean isId(String id) {
+    private boolean isId(String id) {
         boolean found = false;
         ObservableList<Model> data = tableView.getItems();
         for (Model model : data) {
