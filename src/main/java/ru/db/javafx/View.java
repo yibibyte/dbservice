@@ -32,7 +32,7 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) {
-        stage.setTitle("CRUD Postgres");
+        stage.setTitle("Операции CRUD в Postgres");
 
         // TableView
         tableView = new TableView<>();
