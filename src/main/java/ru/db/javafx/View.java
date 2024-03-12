@@ -60,13 +60,13 @@ public class View extends Application {
         idTextField = new TextField();
 
         // Buttons
-        addButton = new Button("Add");
+        addButton = new Button(" Создать новую задачу ");
         addButton.setOnAction(e -> add());
 
-        updateButton = new Button("Update");
+        updateButton = new Button(" Обновить поля ");
         updateButton.setOnAction(e -> update());
 
-        deleteButton = new Button("Delete");
+        deleteButton = new Button(" Удалить задачу ");
         deleteButton.setOnAction(actionEvent -> delete());
 
         // GridPane
@@ -76,16 +76,17 @@ public class View extends Application {
         gridPane.setVgap(10);
 
         gridPane.add(tableView, 0, 0, 3, 1);
-        gridPane.add(new Label("Task:"), 0, 1);
+        gridPane.add(new Label("Task"), 0, 1);
         gridPane.add(taskTextField, 1, 1);
-        gridPane.add(new Label("State:"), 0, 2);
+        gridPane.add(new Label("State"), 0, 2);
         gridPane.add(stateTextField, 1, 2);
-        gridPane.add(new Label("Description:"), 0, 3);
+        gridPane.add(new Label("Description"), 0, 3);
         gridPane.add(descriptionTextField, 1, 3);
-        gridPane.add(addButton, 2, 2);
-        gridPane.add(updateButton, 0, 4);
-        gridPane.add(idTextField, 0, 5);
-        gridPane.add(deleteButton, 1, 5);
+        gridPane.add(new Label("ID"), 0, 4);
+        gridPane.add(idTextField, 1, 4);
+        gridPane.add(updateButton, 0, 5);
+        gridPane.add(addButton, 1, 5);
+        gridPane.add(deleteButton, 2, 5);
 
         // Scene
         Scene scene = new Scene(gridPane);
