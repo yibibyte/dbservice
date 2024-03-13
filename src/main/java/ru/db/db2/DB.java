@@ -1,4 +1,4 @@
-package ru.db;
+package ru.db.db2;
 
 public class DB {
     /*

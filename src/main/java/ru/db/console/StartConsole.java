@@ -1,9 +1,9 @@
-package ru.db;
+package ru.db.console;
 
 import org.postgresql.util.PSQLException;
 
 import java.sql.*;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Logic Connection to DB
@@ -12,6 +12,7 @@ public class StartConsole {
     private static final String USER_NAME = "postgres";
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
+    Task task;
     /*
     jdbc:postgresql:database
     jdbc:postgresql:/
@@ -26,26 +27,102 @@ public class StartConsole {
         try (Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD)) {
             Scanner scanner = new Scanner(System.in);
             while (true) {
+                System.out.println(" 0. Вывести задачи на экран ");
                 System.out.println(" 1. Показать все задачи ");
                 System.out.println(" 2. Обновить задачу ");
                 System.out.println(" 3. Создать задачу ");
                 System.out.println(" 4. Удалить задачу ");
                 System.out.println(" 5. Выйти ");
                 int command = scanner.nextInt();
+                List<Task> listTasks = new ArrayList<>();
+                Map<Integer, Task> mapTasks = new HashMap<>();
 
                 switch (command) {
+
+                    case 0:
+                        // listTasks.forEach(task -> System.out.println(task)); // Используйте лямбда-выражение для вывода каждой задачи
+
+                        // Утверждение на отправку в базу данных наш запрос
+                        Statement statement = connection.createStatement();
+                        String SELECT_TASK_SQL = "select * from tasks order by id asc";
+                        ResultSet resultSet = statement.executeQuery(SELECT_TASK_SQL);
+                        while (resultSet.next()) {
+                            Task task = new Task(
+                                    resultSet.getInt("id"),
+                                    resultSet.getString("task"),
+                                    resultSet.getString("state"),
+                                    resultSet.getString("description"));
+                            listTasks.add(task);
+                            mapTasks.put(task.getId(), task);
+                        }
+                        // Сортируем коллекцию по state
+                        //    TaskManager.sortTasksByName(listTasks);
+
+                        // Преобразовать Map в TreeMap, который автоматически сортирует элементы по ключу.
+                        // добавляем элементы в unsortedMap
+                        Map<Integer, Task> sortedMap = new TreeMap<>(mapTasks);
+
+                        /*
+                        Map<String, Integer> unsortedMap = new HashMap<>();
+                        // добавляем элементы в unsortedMap
+                        List<Map.Entry<String, Integer>> list = new ArrayList<>(unsortedMap.entrySet());
+                        list.sort(Map.Entry.comparingByValue());
+
+                        Map<String, Integer> sortedMap = new LinkedHashMap<>();
+                        for (Map.Entry<String, Integer> entry : list) {
+                            sortedMap.put(entry.getKey(), entry.getValue());
+                        }
+                         */
+
+
+                        System.out.println(sortedMap);
+                        System.out.println("========================= Start List ========================================");
+
+                        // Перебираем map и выводим каждый элемент на консоль
+                        for (Task task : listTasks) {
+                            System.out.println("Task ID: " + task.getId());
+                            System.out.println("Task Name: " + task.getTask());
+                            System.out.println("Task State: " + task.getState());
+                            System.out.println("Task Description: " + task.getDescription());
+                            System.out.println();
+                        }
+
+                        System.out.println("========================= End List ========================================");
+                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                        System.out.println("========================= Start Map ========================================");
+
+                        // Перебираем Map и выводим каждую задачу на консоль
+                        for (Map.Entry<Integer, Task> entry : mapTasks.entrySet()) {
+                            Integer key = entry.getKey();
+                            Task task = entry.getValue();
+
+                            System.out.println("Task ID: " + task.getId());
+                            System.out.println("Task Name: " + task.getTask());
+                            System.out.println("Task State: " + task.getState());
+                            System.out.println("Task Description: " + task.getDescription());
+                            System.out.println();
+                        }
+
+                        System.out.println("========================= End Map ========================================");
+                        break;
                     case 1:
                         try {
                             // Утверждение на отправку в базу данных наш запрос
-                            Statement statement = connection.createStatement();
-                            String SELECT_TASK_SQL = "select * from tasks order by id asc";
-                            ResultSet resultSet = statement.executeQuery(SELECT_TASK_SQL);
-                            while (resultSet.next()) {
+                            Statement statement2 = connection.createStatement();
+                            String SELECT_TASK_SQL2 = "select * from tasks order by id asc";
+                            ResultSet resultSet2 = statement2.executeQuery(SELECT_TASK_SQL2);
+                            while (resultSet2.next()) {
+                                Task task = new Task(
+                                        resultSet2.getInt("id"),
+                                        resultSet2.getString("task"),
+                                        resultSet2.getString("state"),
+                                        resultSet2.getString("description"));
                                 System.out.println(
-                                        resultSet.getInt("id") + " | " +
-                                                resultSet.getString("task") + " | " +
-                                                resultSet.getString("state") + " | " +
-                                                resultSet.getString("description"));
+                                        resultSet2.getInt("id") + " | " +
+                                                resultSet2.getString("task") + " | " +
+                                                resultSet2.getString("state") + " | " +
+                                                resultSet2.getString("description"));
+                                listTasks.add(task);
                             }
                             System.out.println();
                         } catch (PSQLException e) {
