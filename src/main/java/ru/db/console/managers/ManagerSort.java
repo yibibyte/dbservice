@@ -1,7 +1,7 @@
 package ru.db.console.managers;
 
-import ru.db.console.models.tasks.Task;
 import ru.db.console.comparators.tasks.TaskStateComparator;
+import ru.db.console.models.tasks.Task;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * Для сортировки task по имени
  */
 public class ManagerSort {
-    public static void sortTasksByName(List<Task> tasks) {
+    public static void sortTasksByComparator(List<Task> tasks) {
         Collections.sort(tasks, new TaskStateComparator());
     }
 }

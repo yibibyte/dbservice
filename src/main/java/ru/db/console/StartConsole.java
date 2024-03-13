@@ -1,12 +1,16 @@
 package ru.db.console;
 
 import org.postgresql.util.PSQLException;
+import ru.db.console.comparators.tasks.TaskDescriptionComparator;
+import ru.db.console.managers.ManagerSort;
 import ru.db.console.models.tasks.Task;
 
 import java.sql.*;
 import java.util.*;
 
 /**
+ * Start App
+ * &&
  * Logic Connection to DB
  */
 public class StartConsole {
@@ -49,29 +53,29 @@ public class StartConsole {
                             mapTasks.put(task.getId(), task);
                         }
                         // Сортируем коллекцию по state
-                        //    TaskManager.sortTasksByName(listTasks);
-
-                        // Преобразовать Map в TreeMap, который автоматически сортирует элементы по ключу.
-                        // добавляем элементы в unsortedMap
-                        Map<Integer, Task> sortedMap = new TreeMap<>(mapTasks);
-
-                        /*
-                        Map<String, Integer> unsortedMap = new HashMap<>();
-                        // добавляем элементы в unsortedMap
-                        List<Map.Entry<String, Integer>> list = new ArrayList<>(unsortedMap.entrySet());
-                        list.sort(Map.Entry.comparingByValue());
-
-                        Map<String, Integer> sortedMap = new LinkedHashMap<>();
-                        for (Map.Entry<String, Integer> entry : list) {
-                            sortedMap.put(entry.getKey(), entry.getValue());
-                        }
-                         */
+                        ManagerSort.sortTasksByComparator(listTasks);
 
 
-                        System.out.println(sortedMap);
-                        System.out.println("========================= Start List ========================================");
+                        // Преобразуем Map в List для сортировки
+                        List<Task> listTasksFromMap = new ArrayList<>(mapTasks.values());
 
-                        // Перебираем map и выводим каждый элемент на консоль
+                        // Сортируем List с использованием Comparable
+                        TaskDescriptionComparator taskDescriptionComparator = new TaskDescriptionComparator();
+                        Collections.sort(listTasksFromMap, taskDescriptionComparator);
+
+
+                        // добавляем элементы в Unsorted Map в наш mapTasks
+//                        List<Map.Entry<Integer, Task>> list = new ArrayList<>(mapTasks.entrySet());
+//                        list.sort(Map.Entry.comparingByValue());
+//
+//                        Map<Integer, Task> sortedMap = new LinkedHashMap<>();
+//                        for (Map.Entry<Integer, Task> entry : list) {
+//                            sortedMap.put(entry.getKey(), entry.getValue());
+//                        }
+
+                        System.out.println("************************* Start List *************************");
+
+                        // Перебираем list и выводим каждый элемент на консоль
                         for (Task task : listTasks) {
                             System.out.println("Task ID: " + task.getId());
                             System.out.println("Task Name: " + task.getTask());
@@ -80,22 +84,31 @@ public class StartConsole {
                             System.out.println();
                         }
 
-                        System.out.println("========================= End List ========================================");
-                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                        System.out.println("========================= Start Map ========================================");
+                        System.out.println("************************* End List *************************");
+                        System.out.println("                             && ");
+                        System.out.println("************************* Start Map *************************");
 
                         // Перебираем Map и выводим каждую задачу на консоль
-                        for (Map.Entry<Integer, Task> entry : mapTasks.entrySet()) {
+ /*                       for (Map.Entry<Integer, Task> entry : mapTasks.entrySet()) {
                             Integer key = entry.getKey();
                             Task task = entry.getValue();
 
+                            //System.out.println("Task ID: " + key);
+                            System.out.println("Task ID: " + task.getId());
+                            System.out.println("Task Name: " + task.getTask());
+                            System.out.println("Task State: " + task.getState());
+                            System.out.println("Task Description: " + task.getDescription());
+                            System.out.println();
+                        }*/
+
+                        // Перебираем map и выводим каждый элемент на консоль
+                        for (Task task : listTasksFromMap) {
                             System.out.println("Task ID: " + task.getId());
                             System.out.println("Task Name: " + task.getTask());
                             System.out.println("Task State: " + task.getState());
                             System.out.println("Task Description: " + task.getDescription());
                             System.out.println();
                         }
-
                         System.out.println("========================= End Map ========================================");
                         break;
                     case 1:
