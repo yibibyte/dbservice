@@ -1,6 +1,7 @@
 package ru.db.console;
 
 import org.postgresql.util.PSQLException;
+import ru.db.console.models.tasks.Task;
 
 import java.sql.*;
 import java.util.*;
@@ -13,14 +14,6 @@ public class StartConsole {
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
     Task task;
-    /*
-    jdbc:postgresql:database
-    jdbc:postgresql:/
-    jdbc:postgresql://host/database
-    jdbc:postgresql://host/
-    jdbc:postgresql://host:port/database
-    jdbc:postgresql://host:port/
-    */
 
     public static void main(String[] args) throws Exception {
         // Class.forName(JDBC_DRIVER); старый способ

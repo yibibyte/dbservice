@@ -117,7 +117,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <!--                            <mainClass>com.example.demo2/com.example.demo2.app.App</mainClass>-->
-                            <mainClass>ru.db.javafx.View</mainClass>
+                            <mainClass>ru.db.javafx.StartApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
@@ -134,7 +134,7 @@
                             <options>
                                 <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:8000</option>
                             </options>
-                            <mainClass>ru.db.javafx.View</mainClass>
+                            <mainClass>ru.db.javafx.StartApplication</mainClass>
                         </configuration>
                     </execution>
                 </executions>
@@ -147,7 +147,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.db.javafx.View</mainClass>
+                            <mainClass>ru.db.javafx.StartApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -1,4 +1,4 @@
-package ru.db.console;
+package ru.db.console.models.tasks;
 
 import java.util.ArrayList;
 import java.util.Iterator;

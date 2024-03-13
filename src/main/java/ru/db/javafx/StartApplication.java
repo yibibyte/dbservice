@@ -1,7 +1,5 @@
 package ru.db.javafx;
 
-import java.util.List;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +10,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class View extends Application {
+import java.util.List;
+
+public class StartApplication extends Application {
 
     private AppController controller;
     private TableView<Model> tableView;
@@ -26,7 +26,7 @@ public class View extends Application {
     private Button updateButton;
     private Button deleteButton;
 
-    public View() {
+    public StartApplication() {
         controller = new AppController();
     }
 

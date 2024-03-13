@@ -1,4 +1,6 @@
-package ru.db.console;
+package ru.db.console.comparators.tasks;
+
+import ru.db.console.models.tasks.Task;
 
 import java.util.Comparator;
 

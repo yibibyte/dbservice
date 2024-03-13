@@ -1,4 +1,4 @@
-package ru.db.db2;
+package ru.db.console.models.users;
 
 public class DB {
     /*
