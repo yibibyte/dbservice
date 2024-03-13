@@ -1,7 +1,5 @@
 package ru.db.javafx;
 
-import javafx.scene.control.Alert;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,17 +57,12 @@ public class AppController {
             statement.setString(1, state);
             statement.setString(2, task);
             statement.setString(3, description);
-            if (idTask.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Не корректный id");
-                alert.setTitle("Ошибка ID");
-                alert.setContentText("Введите id для обновления полей");
-                alert.showAndWait();
-            } else {
             statement.setInt(4, Integer.parseInt(idTask));
+
             statement.executeUpdate();
-            }
         } catch (SQLException e) {
             System.err.println("Ошибка SQL: " + e.getMessage());
+
         }
     }
 

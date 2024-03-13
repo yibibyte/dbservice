@@ -1,4 +1,6 @@
-package ru.db;
+package ru.db.db2;
+
+import ru.db.console.User;
 
 import java.sql.SQLException;
 
