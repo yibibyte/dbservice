@@ -2,6 +2,7 @@ package ru.db.console;
 
 import org.postgresql.util.PSQLException;
 import ru.db.console.comparators.tasks.TaskDescriptionComparator;
+import ru.db.console.comparators.tasks.TaskStateComparator;
 import ru.db.console.managers.ManagerSort;
 import ru.db.console.models.tasks.Task;
 
@@ -41,7 +42,7 @@ public class StartConsole {
 
                         // Утверждение на отправку в базу данных наш запрос
                         Statement statement = connection.createStatement();
-                        String SELECT_TASK_SQL = "select * from tasks order by id asc";
+                        String SELECT_TASK_SQL = "select * from tasks order by id desc";
                         ResultSet resultSet = statement.executeQuery(SELECT_TASK_SQL);
                         while (resultSet.next()) {
                             Task task = new Task(
@@ -61,7 +62,8 @@ public class StartConsole {
 
                         // Сортируем List с использованием Comparable
                         TaskDescriptionComparator taskDescriptionComparator = new TaskDescriptionComparator();
-                        Collections.sort(listTasksFromMap, taskDescriptionComparator);
+                        TaskStateComparator taskStateComparator = new TaskStateComparator();
+                        Collections.sort(listTasksFromMap, taskStateComparator);
 
 
                         // добавляем элементы в Unsorted Map в наш mapTasks
