@@ -14,11 +14,11 @@ public class Main {
         Integer element = Util.getElement(intArray, 2);
         System.out.println("Element at index 2: " + element);
 
-        // Обобщенный интерфейс
+        // IPair Обобщенный интерфейс
         IPair<String, Integer> orderedIPair = new OrderedIPair<>("One", 1);
         System.out.println("Key: " + orderedIPair.getKey() + ", Value: " + orderedIPair.getValue());
 
-        // Ограничения типов (bounded types)
+        // NumberBox Ограничения типов (bounded types)
         NumberBox<Integer> integerBox = new NumberBox<>();
         integerBox.setContent(42);
         Integer intValue = integerBox.getContent();
