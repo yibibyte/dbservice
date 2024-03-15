@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Пример сортировки коллекции с помощью встроенного механизма класса Collections
+ */
 public class StartSort {
     public static void main(String[] args) {
         List<Person> people = Arrays.asList(new Person("John", "Doe"),
