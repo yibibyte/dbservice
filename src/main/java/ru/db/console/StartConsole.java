@@ -10,9 +10,7 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * Start App
- * &&
- * Logic Connection to DB
+ * Запуск консольного приложения для взаимодействия с базой данных
  */
 public class StartConsole {
     private static final String USER_NAME = "postgres";

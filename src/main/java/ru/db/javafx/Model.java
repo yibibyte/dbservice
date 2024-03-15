@@ -1,5 +1,8 @@
 package ru.db.javafx;
 
+/**
+ * Модель данных через которую мы обращаемся с базой данных
+ */
 public class Model {
 
     private int id;

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class MainPeople {
+public class StartSort {
     public static void main(String[] args) {
         List<Person> people = Arrays.asList(new Person("John", "Doe"),
                 new Person("Bob", "Dole"),

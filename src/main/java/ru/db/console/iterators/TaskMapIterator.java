@@ -5,6 +5,10 @@ import ru.db.console.models.tasks.Task;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * Это кастомная форма Iterator'а для реализации,
+ * какой-то своей логики прохождения по элементам Map
+ */
 public class TaskMapIterator {
     public void iterateTasks(Map<Integer, Task> taskMap) {
         Iterator<Map.Entry<Integer, Task>> iterator = taskMap.entrySet().iterator();

@@ -5,6 +5,10 @@ import ru.db.console.models.tasks.Task;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Это кастомная форма Iterator'а для реализации,
+ * какой-то своей логики прохождения по элементам List
+ */
 public class TaskListIterator implements Iterator<Task> {
     private final List<Task> tasks;
     private int currentIndex;

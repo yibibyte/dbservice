@@ -12,6 +12,10 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
+/**
+ * Запуск Desktop приложения для взаимодействия с базой данных
+ */
+
 public class StartApplication extends Application {
 
     private AppController controller;

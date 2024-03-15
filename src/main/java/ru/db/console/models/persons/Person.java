@@ -26,8 +26,8 @@ public class Person implements Comparable<Person> {
 
     @Override
     public boolean equals(Object o) {
-        if (! (o instanceof Person)) return false;
-        Person p = (Person)o;
+        if (!(o instanceof Person)) return false;
+        Person p = (Person) o;
         return firstName.equals(p.firstName) && lastName.equals(p.lastName);
     }
 
@@ -38,9 +38,7 @@ public class Person implements Comparable<Person> {
 
     @Override
     public int compareTo(Person other) {
-        // If this' lastName and other's lastName are not comparably equivalent,
-        // Compare this to other by comparing their last names.
-        // Otherwise, compare this to other by comparing their first names
+        // Если эта фамилия и фамилия другого человека не являются эквивалентами, тогда сравнится их имена
         int lastNameCompare = lastName.compareTo(other.lastName);
         if (lastNameCompare != 0) {
             return lastNameCompare;

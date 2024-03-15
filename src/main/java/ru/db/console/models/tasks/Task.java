@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Task implements Comparable<Task>, Iterable<Task> {
-//    public class Task implements Comparable<Task>, Comparator<Task>
+    //    public class Task implements Comparable<Task>, Comparator<Task>
     private int id;
     private String task;
     private String state;

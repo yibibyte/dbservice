@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Коyтроллер для связывания нашей внутренней логики с представлением пользователя через UI
+ */
 public class AppController {
 
     private Connection connection;

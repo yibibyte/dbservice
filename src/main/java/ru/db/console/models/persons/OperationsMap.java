@@ -3,7 +3,10 @@ package ru.db.console.models.persons;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapExample {
+/**
+ * Класс демонстрирующий операции коллекции Map
+ */
+public class OperationsMap {
     public static void main(String[] args) {
         Map<String, String> students = new HashMap<>();
         students.put("Max", "Maximov");
