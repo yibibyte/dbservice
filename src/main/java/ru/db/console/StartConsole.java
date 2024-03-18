@@ -3,7 +3,6 @@ package ru.db.console;
 import org.postgresql.util.PSQLException;
 import ru.db.console.comparators.tasks.TaskDescriptionComparator;
 import ru.db.console.comparators.tasks.TaskStateComparator;
-import ru.db.console.managers.ManagerSort;
 import ru.db.console.models.tasks.Task;
 
 import java.sql.*;
@@ -40,7 +39,7 @@ public class StartConsole {
 
                         // Утверждение на отправку в базу данных наш запрос
                         Statement statement = connection.createStatement();
-                        String SELECT_TASK_SQL = "select * from tasks order by id desc";
+                        String SELECT_TASK_SQL = "select * from tasks order by id asc";
                         ResultSet resultSet = statement.executeQuery(SELECT_TASK_SQL);
                         while (resultSet.next()) {
                             Task task = new Task(
@@ -52,16 +51,18 @@ public class StartConsole {
                             mapTasks.put(task.getId(), task);
                         }
                         // Сортируем коллекцию по state
-                        ManagerSort.sortTasksByComparator(listTasks);
+                        // ManagerSort.sortTasksByComparator(listTasks);
+                        TaskDescriptionComparator taskDescriptionComparatorList = new TaskDescriptionComparator();
+                        Collections.sort(listTasks,taskDescriptionComparatorList);
 
-
+                        //////////////////////////// Map
                         // Преобразуем Map в List для сортировки
                         List<Task> listTasksFromMap = new ArrayList<>(mapTasks.values());
 
                         // Сортируем List с использованием Comparable
-                        TaskDescriptionComparator taskDescriptionComparator = new TaskDescriptionComparator();
+                        TaskDescriptionComparator taskDescriptionComparatorMap = new TaskDescriptionComparator();
                         TaskStateComparator taskStateComparator = new TaskStateComparator();
-                        Collections.sort(listTasksFromMap, taskStateComparator);
+                        Collections.sort(listTasksFromMap);
 
 
                         // добавляем элементы в Unsorted Map в наш mapTasks
