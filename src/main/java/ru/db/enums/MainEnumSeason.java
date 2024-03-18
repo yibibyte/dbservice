@@ -23,7 +23,7 @@ enum Season {
     }
 }
 
-public class Main {
+public class MainEnumSeason {
     public static void main(String[] args) {
         // Пример использования перечисления
         Season currentSeason = Season.SPRING;
