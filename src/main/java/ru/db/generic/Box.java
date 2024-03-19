@@ -14,4 +14,8 @@ public class Box<T> {
     public int getVolume() {
         return volume;
     }
+
+    Object[] getFiledsBox() {
+        return new Object[]{content, volume};
+    }
 }

@@ -1,7 +1,23 @@
 package ru.db.generic;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
+
+        // Ранее
+        ArrayList arrayList = new ArrayList<>();
+        String string = "Hello World";
+        arrayList.add(string);
+        arrayList.add(10);
+        Object o = arrayList.get(0);
+        string = (String) arrayList.get(0);
+
+        // Сейчас
+//        ArrayList<String> arrayListNew = new ArrayList<String>();
+//        String stringNew = "Hello World";
+//        arrayListNew.add(string);
+//        arrayListNew.add(10);
 
         //  Обобщенный класс Box
         Box<String> stringBox = new Box<>();
