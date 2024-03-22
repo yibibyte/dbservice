@@ -28,12 +28,12 @@ UPDATE tasks SET state = 'state_state', task = 'task_task', description = 'descr
 delete from tasks where id = 10;
 
 
--- Не корректное отображение русского языка, нужно поменять в файл postgres.conf кодировку c 1251 на ru-x-icu во всех местах
-lc_messages = 'Russian_Russia.ru-x-icu'			# locale for system error message
+-- Не корректное отображение русского языка, нужно поменять в файл postgres.conf кодировку c 1251 на UTF-8 во всех местах
+lc_messages = 'Russian_Russia.UTF-8'			# locale for system error message
 					# strings
-lc_monetary = 'Russian_Russia.ru-x-icu'			# locale for monetary formatting
-lc_numeric = 'Russian_Russia.ru-x-icu'			# locale for number formatting
-lc_time = 'Russian_Russia.ru-x-icu'				# locale for time formatting
+lc_monetary = 'Russian_Russia.UTF-8'			# locale for monetary formatting
+lc_numeric = 'Russian_Russia.UTF-8'			# locale for number formatting
+lc_time = 'Russian_Russia.UTF-8'				# locale for time formatting
 
 # default configuration for text search
 default_text_search_config = 'pg_catalog.russian'

@@ -1,18 +1,25 @@
 
 --- Create
-create table tasks (
-    id serial primary key,
-    task varchar(30),
-    state varchar(40),
-    description varchar(100)
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    age INTEGER,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL
 );
 
---- Create
-insert into tasks (id, task, state, description) values (1, 'Установить PostgreSQL', 'Сделано', 'Установить все компоненты к Postgre');
-insert into tasks (id, task, state, description) values (2, 'Настроить БД', 'Сделано', '');
-insert into tasks (id, task, state, description) values (3, 'Проверить БД на подключение', 'Сделано', 'Есть ли подключение к БД');
-insert into tasks (id, task, state, description) values (4, 'Обвновить БД', 'В процессе', 'Обновить ПО в базе данных');
-insert into tasks (task, state, description) values ('Test task', 'Test state', 'Test description');
+--- Create Users
+
+INSERT INTO users (name, age, email, password) VALUES ('User1', 25, 'user1@example.com', 'password1');
+INSERT INTO users (name, age, email, password) VALUES ('User2', 30, 'user2@example.com', 'password2');
+INSERT INTO users (name, age, email, password) VALUES ('User3', 28, 'user3@example.com', 'password3');
+INSERT INTO users (name, age, email, password) VALUES ('User4', 22, 'user4@example.com', 'password4');
+INSERT INTO users (name, age, email, password) VALUES ('User5', 35, 'user5@example.com', 'password5');
+INSERT INTO users (name, age, email, password) VALUES ('User6', 27, 'user6@example.com', 'password6');
+INSERT INTO users (name, age, email, password) VALUES ('User7', 29, 'user7@example.com', 'password7');
+INSERT INTO users (name, age, email, password) VALUES ('User8', 26, 'user8@example.com', 'password8');
+INSERT INTO users (name, age, email, password) VALUES ('User9', 31, 'user9@example.com', 'password9');
+INSERT INTO users (name, age, email, password) VALUES ('User10', 33, 'user10@example.com', 'password10');
 
 -- Read запрос
 select * from tasks order by task desc;
