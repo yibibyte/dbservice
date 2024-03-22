@@ -22,30 +22,30 @@ INSERT INTO users (name, age, email, password) VALUES ('User9', 31, 'user9@examp
 INSERT INTO users (name, age, email, password) VALUES ('User10', 33, 'user10@example.com', 'password10');
 
 -- Read запрос
-select * from tasks order by task desc;
+select * from users order by users asc;
 
 --- UPDATE
-update task set state = 'В процессе' where id = 1;
+update users set state = 'В процессе' where id = 1;
 
 
 -- Delete
-delete from tasks where id = 9;
-delete from tasks where id = 10;
-delete from tasks where id = 11;
-delete from tasks where id = 12;
-delete from tasks where id = 14;
-delete from tasks where id = 15;
-delete from tasks where id = 16;
-delete from tasks where id = 17;
+delete from users where id = 9;
+delete from users where id = 10;
+delete from users where id = 11;
+delete from users where id = 12;
+delete from users where id = 14;
+delete from users where id = 15;
+delete from users where id = 16;
+delete from users where id = 17;
 
 
 
 -------------------
 
 
-select * from task order by id desc
+select * from users order by id desc
 
-update task set state = 'В процессе' where id = 1;
+update users set state = 'В процессе' where id = 1;
 
 
 insert into author(name) values('Virginia Woolf');
