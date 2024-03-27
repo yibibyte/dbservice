@@ -10,5 +10,10 @@ public class OperationMain {
         Action<String> concatinationAction = (variableOne, variableTwo) -> variableOne + variableTwo;
         System.out.println(concatinationAction.getValueAction("One", "Two"));
 
+        FunctionIntegerImpl functInteger = new FunctionIntegerImpl();
+        System.out.printf(functInteger.getValueAction(300, 400) + " ");
+
+        FunctionStringImpl functionString = new FunctionStringImpl();
+        System.out.printf(functionString.getValueAction("Hello", "World"));
     }
 }
