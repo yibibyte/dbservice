@@ -2,10 +2,11 @@ package ru.db.anonymousclass;
 
 public class MainButtonClass {
     public static void main(String[] args) {
-        ButtonClick button = new ButtonOpen(){
+        ButtonClick button = new ButtonOpen() {
             public void clickOnButton() {
                 System.out.println("Открыть файл с помощью класса");
             }
+
             public void clickOnButtonAndCloseFile() {
                 System.out.println("Кликнуть на кнопку и Закрыть файл");
             }

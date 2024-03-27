@@ -15,7 +15,6 @@ public class MainButtonInterface {
 
 class ClickButton {
     EventHandler eventHandler;
-
     ClickButton(EventHandler eventHandler) {
         this.eventHandler = eventHandler;
     }
