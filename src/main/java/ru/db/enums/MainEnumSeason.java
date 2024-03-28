@@ -27,7 +27,7 @@ public class MainEnumSeason {
     public static void main(String[] args) {
         // Пример использования перечисления
         Season currentSeason = Season.SPRING;
-        System.out.println("Current season: " + currentSeason);
+        System.out.println("Current season: " + currentSeason + "\n");
 
         // Вызов статического метода
         Season.printAllSeasons();

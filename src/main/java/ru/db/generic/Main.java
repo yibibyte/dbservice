@@ -6,7 +6,8 @@ public class Main {
     public static void main(String[] args) {
 
         // Ранее
-        ArrayList arrayList = new ArrayList<>();
+        ArrayList arrayList = new ArrayList();
+        //List arrayList2 = new ArrayList();
         String string = "Hello World";
         arrayList.add(string);
         arrayList.add(10);
@@ -21,6 +22,7 @@ public class Main {
 
         //  Обобщенный класс Box
         Box<String> stringBox = new Box<>();
+        Box<Integer> intBox = new Box<>();
         stringBox.setContent("Hello, Generics!");
         String content = stringBox.getContent();
         System.out.println(content);

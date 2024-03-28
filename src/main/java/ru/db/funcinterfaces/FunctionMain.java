@@ -12,14 +12,14 @@ public class FunctionMain {
         System.out.println(predicate.test(2));
 
         // Consumer<Integer> consumer = string -> System.out.println(string);
-        Consumer<Integer> consumer = string -> System.out.println("Это результат Consumer Interface в консоли");
-        System.out.println(consumer);
-
+        Consumer<String> consumer = string -> System.out.println("Это результат Consumer Interface в консоли " + string);
+       // System.out.println(consumer.accept("2"));
+        consumer.accept("2");
         // Consumer<Integer> consumer = System.out::println;
         // System.out.println(consumer);
 
         // Function Multiplier valuer by 2
-        Function<Integer, Integer> function = value -> value * 2;
+        Function<Integer, Double> function = value -> (double)value * 2;
         System.out.println(function.apply(15));
         System.out.println(function.apply(25));
 
@@ -60,7 +60,6 @@ public class FunctionMain {
         System.out.println(binaryOperatorMultiply.apply(40, 30));
         BinaryOperator<Integer> binaryOperatorPow = (a, b) -> (int) Math.pow(a, b);
         System.out.println(binaryOperatorPow.apply(10, 20));
-
 
     }
 }

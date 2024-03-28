@@ -1,17 +1,17 @@
 package ru.db.generic;
 
-import javafx.scene.SubScene;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class CastingType {
     public static void main(String[] args) {
         List<Animal> animals = new ArrayList<>();
+        //List animals = new ArrayList();
         ArrayList<Animal> animalsArrayList = new ArrayList<>();
         Dog dog = new Dog();
+        Animal animal = new Animal();
         animals.add(dog);
+        animals.add(animal);
 
         if (animals.get(0) instanceof Dog) {
             Dog retrievedDog = (Dog) animals.get(0);

@@ -10,6 +10,7 @@ public class MainButtonInterface {
         });
         button.clickOnButton();
         //button.clickOnButtonAndCloseFile();
+        button.open();
     }
 }
 
@@ -21,5 +22,8 @@ class ClickButton {
 
     public void clickOnButton() {
         eventHandler.toExecute();
+    }
+    public void open() {
+        System.out.println(" Open File");
     }
 }

@@ -4,7 +4,7 @@ public class MainButtonClass {
     public static void main(String[] args) {
         ButtonClick button = new ButtonOpen() {
             public void clickOnButton() {
-                System.out.println("Открыть файл с помощью класса");
+                System.out.println("Открыть файл с помощью класса ButtonClick");
             }
 
             public void clickOnButtonAndCloseFile() {
@@ -19,6 +19,9 @@ public class MainButtonClass {
 class ButtonClick {
     public void clickOnButton() {
         System.out.println("Кликать на кнопку");
+    }
+    public void clickOnButtonAndCloseFile() {
+        System.out.println("Кликнуть на кнопку и Закрыть файл");
     }
 }
 
