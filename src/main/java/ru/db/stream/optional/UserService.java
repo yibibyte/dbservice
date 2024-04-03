@@ -1,4 +1,4 @@
-package ru.db.optional;
+package ru.db.stream.optional;
 
 import java.util.Optional;
 
