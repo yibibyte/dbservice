@@ -11,6 +11,13 @@ import java.util.stream.Collectors;
 public class OptionalInStream {
     public static void main(String[] args) {
         List<String> values = Arrays.asList("value1", "value2", null, "value3");
+        String str;
+
+        if (values.get(2) != null) {
+            // main logic
+        } else {
+            values.set(2, "");
+        }
 
         // Преобразование списка значений в список Optional
         List<Optional<String>> optionalValues = values.stream()

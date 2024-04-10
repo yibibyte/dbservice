@@ -3,7 +3,6 @@ package ru.db.stream.streams;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MainStreamPerson {
 
@@ -30,7 +29,7 @@ public class MainStreamPerson {
         List<String> namesOver30 = persons.stream()
                 .filter(person -> person.getAge() > 30) // Фильтруем людей старше 30 лет
                 .map(Person::getName) // Преобразуем Person в String (имя)
-                .collect(Collectors.toList()); // Собираем Stream в List
+                .toList(); // Собираем Stream в List
         System.out.println("Список имен людей старше 30:");
         namesOver30.forEach(System.out::print);
 
