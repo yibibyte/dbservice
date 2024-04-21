@@ -1,7 +1,13 @@
 package ru.db.annotations.reflection;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class MyClass {
-    private int number;
+
+    private int number = 1000;
     private String name = "default";
     // Конструктор по умолчанию
 /*        public MyClass() {
@@ -12,18 +18,19 @@ public class MyClass {
         this.number = number;
         this.name = name;
     }*/
-    public int getNumber() {
-        return number;
-    }
-    public void setNumber(int number) {
-        this.number = number;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
+
+
+
     private void printData(){
-        System.out.println(number + name);
+        System.out.println(number + " " + name + " Это метод printData() из класса MyClass");
     }
 
 
+    @Override
+    public String toString() {
+        return "MyClass{" +
+                "number=" + number +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

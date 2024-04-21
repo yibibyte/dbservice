@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 public class Main {
     public static void main(String[] args) {
         MyClass myClass = new MyClass();
+
         int number = myClass.getNumber();
         String name = null;
         System.out.println(number + " " + name);
@@ -34,7 +35,7 @@ public class Main {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        System.out.println(nameClass);
+        System.out.println(nameClass.getNumber());
 
 
 
@@ -61,11 +62,11 @@ public class Main {
         }*/
     }
 
-    public static void printData(Object myClass) {
+    public static void printData(MyClass myClass) {
         try {
-            Method method = myClass.getClass().getDeclaredMethod("printData");
-            method.setAccessible(true);
-            method.invoke(myClass);
+            Method printDataMethodReflection = myClass.getClass().getDeclaredMethod("printData");
+            printDataMethodReflection.setAccessible(true);
+            printDataMethodReflection.invoke(myClass);
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }

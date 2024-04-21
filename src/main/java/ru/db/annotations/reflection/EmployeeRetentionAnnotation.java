@@ -4,4 +4,5 @@ package ru.db.annotations.reflection;
 @OurRuntimeRetention
 @OurClassRetention
 public class EmployeeRetentionAnnotation {
+
 }
