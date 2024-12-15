@@ -79,9 +79,9 @@ public class StartConsole {
                         // Перебираем list и выводим каждый элемент на консоль
                         for (Task task : listTasks) {
                             System.out.println("Task ID: " + task.getId());
-                            System.out.println("Task Name: " + task.getTask());
-                            System.out.println("Task State: " + task.getState());
-                            System.out.println("Task Description: " + task.getDescription());
+                            System.out.println("Name: " + task.getTask());
+                            System.out.println("State: " + task.getState());
+                            System.out.println("Description: " + task.getDescription());
                             System.out.println();
                         }
 
@@ -105,9 +105,9 @@ public class StartConsole {
                         // Перебираем map и выводим каждый элемент на консоль
                         for (Task task : listTasksFromMap) {
                             System.out.println("Task ID: " + task.getId());
-                            System.out.println("Task Name: " + task.getTask());
-                            System.out.println("Task State: " + task.getState());
-                            System.out.println("Task Description: " + task.getDescription());
+                            System.out.println("Name: " + task.getTask());
+                            System.out.println("State: " + task.getState());
+                            System.out.println("Description: " + task.getDescription());
                             System.out.println();
                         }
                         System.out.println("========================= End Map ========================================");
