@@ -13,8 +13,11 @@ interface MathOperation {
  */
 public class MainLambdaAndFunctionInterfaceOperation {
     public static void main(String[] args) {
+
         // Использование лямбда-выражения для реализации пользовательского функционального интерфейса
-        MathOperation addition = (a, b) -> a + b;
+        MathOperation addition = Integer::sum;
+
+        // MathOperation addition = Integer::sum;
 
         // Выполнение операции сложения
         int result = addition.operate(5, 3);

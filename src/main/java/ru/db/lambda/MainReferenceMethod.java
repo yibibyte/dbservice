@@ -12,6 +12,8 @@ import java.util.function.Function;
  * который вызывает метод toUpperCase при вызове своего метода apply.
  */
 public class MainReferenceMethod {
+    static int staticVariable = 10;
+
     public static void main(String[] args) {
         // Создаем ссылку на метод toUpperCase класса String
         Function<String, String> toUpperCaseFunction = String::toUpperCase;

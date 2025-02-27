@@ -14,6 +14,7 @@ public class GenericLowerBoundedWildcard {
 
     public static void main(String[] args) {
         List<Object> objectList = new java.util.ArrayList<>();
+        objectList.add(100.0);
         addNumbers(objectList);
 
         System.out.println("Object List: " + objectList);
