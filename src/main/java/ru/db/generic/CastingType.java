@@ -5,21 +5,21 @@ import java.util.List;
 
 public class CastingType {
     public static void main(String[] args) {
-        List<Animal> animals = new ArrayList<>();
+        List<Animal> listAnimals = new ArrayList<>();
         //List animals = new ArrayList();
-        ArrayList<Animal> animalsArrayList = new ArrayList<>();
+        //ArrayList<Animal> animalsArrayList = new ArrayList<>();
         Dog dog = new Dog();
         Animal animal = new Animal();
-        animals.add(dog);
-        animals.add(animal);
+        listAnimals.add(dog);
+        listAnimals.add(animal);
 
-        if (animals.get(0) instanceof Dog) {
-            Dog retrievedDog = (Dog) animals.get(0);
+        if (listAnimals.get(0) instanceof Dog) {
+            Dog retrievedDog = (Dog) listAnimals.get(0);
             System.out.println("Теперь безопасно использовать объект типа Dog");
             retrievedDog.printDog();
         } else {
             System.out.println("Объект не является экземпляром класса Dog");
-            animals.get(0).printAnimal();
+            listAnimals.get(0).printAnimal();
         }
     }
 }

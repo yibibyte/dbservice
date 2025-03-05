@@ -10,6 +10,16 @@ import java.util.*;
 import java.util.stream.*;
 
 public class Streams {
+    public static void main(String[] args) throws IOException {
+        Streams streams = new Streams();
+        streams.creation();
+        streams.filterAndMapDemo();
+        streams.groupingDemo();
+        streams.performanceDemo();
+        streams.terminate();
+        streams.transform();
+        streams.real();
+    }
     private List<Employee> emps = List.of(
             new Employee("Michael", "Smith",   243,  43, Position.CHEF),
             new Employee("Jane",    "Smith",   523,  40, Position.MANAGER),
@@ -185,5 +195,64 @@ public class Streams {
         }
 
         return parent;
+    }
+
+    public void filterAndMapDemo() {
+        System.out.println("Фильтрация и преобразование (Stream API):");
+        List<String> result = emps.stream()
+                .filter(e -> e.getAge() > 30)
+                .map(e -> e.getFirstName() + " " + e.getLastName())
+                .collect(Collectors.toList());
+        System.out.println("Сотрудники старше 30: " + result + "\n--------\n");
+
+        // Сравнение с обычным циклом
+        System.out.println("Фильтрация и преобразование (обычный код):");
+        List<String> loopResult = new ArrayList<>();
+        for (Employee e : emps) {
+            if (e.getAge() > 30) {
+                loopResult.add(e.getFirstName() + " " + e.getLastName());
+            }
+        }
+        System.out.println("Результат: " + loopResult + "\n--------\n");
+    }
+
+    public void groupingDemo() {
+        System.out.println("Группировка по должности (Stream API):");
+        Map<Position, List<Employee>> byPosition = emps.stream()
+                .collect(Collectors.groupingBy(Employee::getPosition));
+        byPosition.forEach((pos, list) ->
+                System.out.println(pos + ": " + list.size() + " чел.")
+        );
+        System.out.println("--------\n");
+
+        // Сравнение с обычным кодом
+        System.out.println("Группировка по должности (обычный код):");
+        Map<Position, List<Employee>> loopMap = new HashMap<>();
+        for (Employee e : emps) {
+            loopMap.computeIfAbsent(e.getPosition(), k -> new ArrayList<>()).add(e);
+        }
+        loopMap.forEach((pos, list) ->
+                System.out.println(pos + ": " + list.size() + " чел.")
+        );
+        System.out.println("--------\n");
+    }
+
+    public void performanceDemo() {
+        List<Integer> numbers = IntStream.range(0, 100_000).boxed().collect(Collectors.toList());
+
+        // Stream API
+        long startTime = System.currentTimeMillis();
+        long sum = numbers.stream().mapToInt(Integer::intValue).sum();
+        long duration = System.currentTimeMillis() - startTime;
+        System.out.printf("Stream API: sum = %d, время = %d мс\n", sum, duration);
+
+        // Обычный цикл
+        startTime = System.currentTimeMillis();
+        long loopSum = 0;
+        for (int num : numbers) {
+            loopSum += num;
+        }
+        duration = System.currentTimeMillis() - startTime;
+        System.out.printf("Обычный код: sum = %d, время = %d мс\n--------\n", loopSum, duration);
     }
 }
