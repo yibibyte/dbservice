@@ -111,7 +111,7 @@ public class Streams {
 
         emps.stream().max(Comparator.comparingInt(Employee::getAge));
 
-        emps.stream().findAny();
+        emps.stream().filter(employee -> employee.getAge() > 30).findAny();
         emps.stream().findFirst();
 
         emps.stream().noneMatch(employee -> employee.getAge() > 60); // true

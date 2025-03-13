@@ -39,7 +39,7 @@ public class MainStreamPerson {
                 .min(Comparator.comparingInt(Person::getAge)) // Сравниваем людей по возрасту и находим самого младшего
                 .orElse(null); // Возвращаем null, если список пустой
 
-        System.out.println("Самый молодой человек: " + youngestPerson.getName() + youngestPerson.getAge());
+        System.out.println("Самый молодой человек: " + youngestPerson.getName() + " " + youngestPerson.getAge());
     }
 }
 
