@@ -9,12 +9,12 @@ import java.util.stream.Stream;
 
 public class StreamApiDemo {
     public static void main(String[] args) throws Exception {
-        demonstrateJoining();
+//        demonstrateJoining();
 //        demonstrateParallel();
 //        demonstrateMap();
 //        demonstrateFlatMap();
 //        demonstrateDistinct();
-//        demonstrateSorted();
+        demonstrateSorted();
 //        demonstratePeek();
 //        demonstrateStreamOf();
 //        demonstrateStreamIterate();
@@ -101,7 +101,7 @@ public class StreamApiDemo {
     private static void demonstrateStreamOf() {
         Stream<String> stream = Stream.of("A", "B", "C");
         System.out.println("\nStream.of() example:");
-        stream.forEach(System.out::println); // A B C
+        stream.forEach(x -> System.out.println(x)); // A B C
     }
 
     private static void demonstrateStreamIterate() {

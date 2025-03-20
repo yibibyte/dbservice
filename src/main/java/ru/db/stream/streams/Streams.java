@@ -109,7 +109,7 @@ public class Streams {
         IntStream.of(100, 200, 300, 400).sum();
         IntStream.of(100, 200, 300, 400).summaryStatistics();
 
-        emps.stream().max(Comparator.comparingInt(Employee::getAge));
+        Optional<Employee> max = emps.stream().max(Comparator.comparingInt(Employee::getAge));
 
         emps.stream().filter(employee -> employee.getAge() > 30).findAny();
         emps.stream().findFirst();
